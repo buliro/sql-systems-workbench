@@ -1,0 +1,124 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.layout {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+  height: 100vh;
+  background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.35), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.25), transparent 45%),
+    $color-bg;
+  color: $color-text;
+}
+
+.layout__skip {
+  position: absolute;
+  top: -999px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: $color-accent;
+  color: #04121f;
+  padding: $spacing-2 $spacing-3;
+  border-radius: $radius-md;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba($color-accent, 0.35);
+
+  &:focus-visible {
+    top: $spacing-3;
+    transition: top 0.15s ease;
+  }
+}
+
+.layout__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-4 clamp($spacing-4, 4vw, $spacing-6);
+  border-bottom: 1px solid $color-border;
+  background: rgba(10, 12, 29, 0.7);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.layout__brand {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+}
+
+.layout__title {
+  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.3rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.layout__subtitle {
+  font-size: 0.9rem;
+  color: $color-text-muted;
+}
+
+.layout__body {
+  display: grid;
+  grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+  gap: $spacing-4;
+  padding: $spacing-4 clamp($spacing-4, 4vw, $spacing-6);
+  height: 100%;
+  min-height: 0;
+  align-items: start;
+  overflow-y: auto;
+}
+
+.layout__sidebar {
+  border-radius: $radius-lg;
+  overflow: hidden;
+  background: rgba($color-surface-alt, 0.4);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow: $shadow-elevated;
+  padding: $spacing-4;
+  position: sticky;
+  top: 0;
+  align-self: start;
+}
+
+.layout__content {
+  min-height: 0;
+}
+
+@media (max-width: 1200px) {
+  .layout__body {
+    grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 960px) {
+  .layout__body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .layout__sidebar {
+    position: static;
+    align-self: stretch;
+    order: 1;
+    margin-bottom: $spacing-3;
+  }
+
+  .layout__content {
+    overflow: visible;
+    order: 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .layout__header {
+    padding: $spacing-3 $spacing-4;
+  }
+
+  .layout__body {
+    padding: $spacing-3;
+    gap: $spacing-3;
+  }
+}

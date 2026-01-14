@@ -1,0 +1,130 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.schema-explorer {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3;
+  height: 100%;
+}
+
+.schema-explorer__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    margin: 0;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-text-muted;
+  }
+}
+
+.schema-explorer__status {
+  margin: 0;
+  font-size: 0.85rem;
+  color: $color-text-muted;
+}
+
+.schema-explorer__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3;
+  overflow-y: auto;
+  padding-right: $spacing-1;
+  @include scrollbar;
+}
+
+.schema-explorer__item {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+}
+
+.schema-explorer__schema {
+  width: 100%;
+  border: none;
+  background: rgba($color-surface-alt, 0.65);
+  color: $color-text;
+  padding: $spacing-3;
+  border-radius: $radius-md;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s ease;
+  text-align: left;
+
+  &--active,
+  &:hover {
+    background: rgba($color-accent, 0.2);
+  }
+}
+
+.schema-explorer__schema-name {
+  font-weight: 600;
+}
+
+.schema-explorer__schema-count {
+  font-size: 0.8rem;
+  color: $color-text-muted;
+}
+
+.schema-explorer__tables {
+  list-style: none;
+  margin: 0;
+  padding: 0 $spacing-3;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+}
+
+.schema-explorer__table {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: $color-text;
+  padding: $spacing-2 $spacing-3;
+  border-radius: $radius-sm;
+  transition: background 0.2s ease;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $spacing-3;
+
+  &--active {
+    background: rgba($color-accent, 0.35);
+  }
+
+  &:hover {
+    background: rgba($color-accent, 0.2);
+  }
+}
+
+.schema-explorer__table-name {
+  font-weight: 500;
+}
+
+.schema-explorer__table-count {
+  font-size: 0.8rem;
+  color: $color-text-muted;
+  white-space: nowrap;
+}
+
+@media (max-width: 960px) {
+  .schema-explorer__header {
+    h2 {
+      font-size: 0.85rem;
+    }
+  }
+
+  .schema-explorer__schema {
+    padding: $spacing-2 $spacing-3;
+  }
+}

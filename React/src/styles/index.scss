@@ -1,0 +1,118 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+*::selection {
+  background: rgba($color-accent, 0.35);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: $font-family-sans;
+  background: $color-bg;
+  color: $color-text;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+*:focus-visible {
+  outline: 2px solid rgba($color-accent, 0.9);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.app__main {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+  padding: $spacing-4;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.app__panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  grid-auto-rows: minmax(0, auto);
+  gap: $spacing-4;
+  align-content: start;
+
+  > * {
+    @include surface;
+    padding: $spacing-4;
+    overflow: visible;
+  }
+
+  > :nth-child(1) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 1200px) {
+  .app__panels {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: repeat(3, minmax(0, auto));
+
+    > :nth-child(1) {
+      grid-column: auto;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .app__main {
+    padding: $spacing-3;
+    gap: $spacing-3;
+  }
+
+  .app__panels {
+    gap: $spacing-3;
+
+    > * {
+      padding: $spacing-3;
+    }
+  }
+}

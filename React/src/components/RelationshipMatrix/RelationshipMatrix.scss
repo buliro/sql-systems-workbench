@@ -1,0 +1,72 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.relationship-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+}
+
+.relationship-matrix--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-muted;
+}
+
+.relationship-matrix__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  h2 {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  p {
+    margin: $spacing-2 0 0;
+    color: $color-text-muted;
+    font-size: 0.85rem;
+  }
+}
+
+.relationship-matrix__status {
+  color: $color-text-muted;
+  font-size: 0.9rem;
+}
+
+.relationship-matrix__table-wrapper {
+  border-radius: $radius-md;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba($color-surface-alt, 0.35);
+  overflow-x: auto;
+  overflow-y: hidden;
+  @include scrollbar;
+}
+
+.relationship-matrix__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  min-width: 540px;
+
+  th,
+  td {
+    padding: $spacing-2 $spacing-3;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    text-align: left;
+  }
+
+  th {
+    font-weight: 600;
+    color: $color-text-muted;
+    position: sticky;
+    top: 0;
+    background: rgba($color-surface-alt, 0.9);
+  }
+
+  code {
+    font-family: $font-family-mono;
+  }
+}
