@@ -1,8 +1,6 @@
 # SQL Systems Workbench — Backend
 
-This module contains the backend implementation for Phase 2. The code aligns
-with the architecture defined in Phase 1, focusing on the database schema, SQL
-execution engine, and REST API.
+This module contains the backend implementation. The code focuses on the database schema, SQL execution engine, and REST API.
 
 ## Structure
 
