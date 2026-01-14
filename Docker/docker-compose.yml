@@ -1,4 +1,4 @@
-version: "3.9"
+name: sql_systems_workbench
 
 services:
   db:
@@ -21,7 +21,7 @@ services:
   api:
     build:
       context: ..
-      dockerfile: Docker/Dockerfile
+      dockerfile: Docker/Dockerfile.api
     depends_on:
       db:
         condition: service_healthy
@@ -35,6 +35,16 @@ services:
     command: ["gunicorn", "app:create_app()", "--bind", "0.0.0.0:8000"]
     ports:
       - "8000:8000"
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: Docker/Dockerfile.react
+    depends_on:
+      api:
+        condition: service_started
+    ports:
+      - "4173:80"
 
 volumes:
   db-data:
