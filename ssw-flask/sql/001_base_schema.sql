@@ -88,6 +88,10 @@ CREATE TABLE IF NOT EXISTS demo.accounts (
     created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+INSERT INTO demo.accounts (email, display_name)
+VALUES ('demo@example.com', 'Demo Account')
+ON CONFLICT DO NOTHING;
+
 CREATE TABLE IF NOT EXISTS demo.projects (
     project_id      BIGSERIAL PRIMARY KEY,
     account_id      BIGINT NOT NULL REFERENCES demo.accounts(account_id) ON DELETE CASCADE,
