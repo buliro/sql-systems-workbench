@@ -194,16 +194,30 @@ class SQLExecutor:
         """Return table entries from the system catalog optionally filtered by schema."""
         if schema is None:
             sql_query = """
-                SELECT schema_name, table_name, owner_role, created_at
-                FROM system.system_tables
+                SELECT
+                    t.schema_name,
+                    t.table_name,
+                    t.owner_role,
+                    t.created_at,
+                    COALESCE(s.n_live_tup, 0)::bigint AS row_estimate
+                FROM system.system_tables t
+                LEFT JOIN pg_stat_all_tables s
+                  ON s.schemaname = t.schema_name AND s.relname = t.table_name
                 ORDER BY schema_name, table_name
             """
             return self.execute(sql_query, None, user_id=user_id).rows
 
         sql_query = """
-            SELECT schema_name, table_name, owner_role, created_at
-            FROM system.system_tables
-            WHERE schema_name = %(schema)s
+            SELECT
+                t.schema_name,
+                t.table_name,
+                t.owner_role,
+                t.created_at,
+                COALESCE(s.n_live_tup, 0)::bigint AS row_estimate
+            FROM system.system_tables t
+            LEFT JOIN pg_stat_all_tables s
+              ON s.schemaname = t.schema_name AND s.relname = t.table_name
+            WHERE t.schema_name = %(schema)s
             ORDER BY schema_name, table_name
         """
         params = {"schema": schema}
