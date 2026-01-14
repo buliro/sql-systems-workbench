@@ -1,8 +1,6 @@
 # SQL Systems Workbench
 
-Backend reference implementation for a PostgreSQL-powered SQL dashboard. The
-project is organized in phases; Phase 2 delivers the database schema, central
-SQL execution engine, and Flask REST API.
+Description: Backend reference implementation for a PostgreSQL-powered SQL dashboard.
 
 ## Technology Stack
 
